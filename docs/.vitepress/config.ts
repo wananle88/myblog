@@ -7,7 +7,7 @@ const dir = path.dirname(fileURLToPath(import.meta.url))
 const postsDir = path.resolve(dir, '../posts')
 
 export default defineConfig({
-  base: '/blog/',
+  base: process.env.VP_BASE || '/blog/',
   lang: 'zh-CN',
   title: '我的博客',
   description: '记录点点滴滴',

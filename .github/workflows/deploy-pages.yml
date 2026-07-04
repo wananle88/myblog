@@ -1,0 +1,63 @@
+name: 部署 GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+env:
+  # 项目页地址为 https://<用户>.github.io/<仓库名>/，base 与仓库名一致
+  VP_BASE: /${{ github.event.repository.name }}/
+
+jobs:
+  build:
+    name: 构建站点
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v7
+
+      - name: 配置 Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: 安装依赖
+        run: |
+          echo ">>> 正在安装 npm 依赖..."
+          npm ci
+          echo ">>> 依赖安装完成"
+
+      - name: 构建 VitePress
+        run: |
+          echo ">>> 子路径 base: ${VP_BASE}"
+          echo ">>> 开始构建 VitePress 站点..."
+          npm run docs:build
+          echo ">>> 构建完成"
+          echo ">>> 输出目录: docs/.vitepress/dist"
+          ls -la docs/.vitepress/dist | head -20
+
+      - name: 上传 Pages 构建产物
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/.vitepress/dist
+
+  deploy:
+    name: 发布到 GitHub Pages
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: 部署到 GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v5
