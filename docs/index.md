@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: 我的博客
+  name: 个人博客
   text: 学习笔记
   tagline: 个人技术博客
   actions:
