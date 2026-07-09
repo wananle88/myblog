@@ -1,3 +1,9 @@
+---
+title: 安卓IDE及开发环境
+date: 2026-05-01
+category: 教程
+---
+
 ## 下载地址
 
 - Android Studio：https://developer.android.com/studio?hl=zh-cn

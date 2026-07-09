@@ -1,3 +1,9 @@
+---
+title: L2TP教程
+date: 2025-09-01
+category: 教程
+---
+
 ### Docker部署
 ```
 services:

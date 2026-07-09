@@ -11,6 +11,8 @@ hero:
       link: /posts/
 
 features:
+  - title: 置顶
+    details: 一些置顶的常用笔记
   - title: 教程
     details: 技术教程与操作指南
   - title: 记录

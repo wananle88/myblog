@@ -1,5 +1,8 @@
-### 先在github创建一个仓库，然后本地CD到项目目录
-
+---
+title: Git文档
+date: 2022-07-02
+category: 置顶
+---
 
 ### 初始化本地仓库
 ```
@@ -218,8 +221,8 @@ git reset --hard 6038e0a
 ### 配置提交用户
 ```
 # 全局配置
-git config --global user.name "sky22333"
-git config --global user.email "sky22333sky22333@gmail.com"
+git config --global user.name "user123"
+git config --global user.email "user123user123@gmail.com"
 
 # 查看
 git config --list
