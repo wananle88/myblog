@@ -16,6 +16,7 @@ interface PostMeta {
 }
 
 const FALLBACK_CATEGORY = '未分类'
+const PINNED_CATEGORY = '置顶'
 
 function normalizeCategory(value: string | undefined): string {
   const category = (value || '').trim()
@@ -23,6 +24,10 @@ function normalizeCategory(value: string | undefined): string {
 }
 
 function sortCategories(a: string, b: string, grouped: Map<string, PostMeta[]>): number {
+  // 「置顶」始终排最前
+  if (a === PINNED_CATEGORY) return -1
+  if (b === PINNED_CATEGORY) return 1
+
   // 「未分类」始终排在最后
   if (a === FALLBACK_CATEGORY) return 1
   if (b === FALLBACK_CATEGORY) return -1
